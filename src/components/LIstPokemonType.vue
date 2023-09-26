@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="nature in pokemonType" :key="nature.id">
-        #{{ nature.id }} - {{ nature.type }}       
+        #{{ nature.id }} - {{ nature.type }}
       </li>
     </ul>
   </div>
@@ -12,7 +12,7 @@ import axios from "axios"
 import {PokemonDataService} from '../services/PokemonDataService'
 interface PokemonType{
   id: number,
-  type: string,   
+  type: string,  
 }
 export default {
   data(){
@@ -38,7 +38,7 @@ export default {
         this.pokemonType = pokemonData.map((type) => {
           return {
             id: type.id,
-            type: type.name,           
+            type: type.name,            
           }
         })
       }catch (error) {

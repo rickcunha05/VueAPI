@@ -5,6 +5,9 @@ import {PokemonDataService} from '../services/PokemonDataService'
  interface PokemonData{
   id: number,
   name: string,  
+  imageFront: string,
+  imageBack: string,
+  //stats: string
 }
 import axios from 'axios';
 
@@ -18,7 +21,7 @@ export default {
     this.PokemonDataService();
   },
   methods: {
-    async PokemonDataService() {
+    async PokemonDataService() {      
       try {
       const response = await PokemonDataService.getPokemon(); 
         const results = response.data.results;
@@ -29,11 +32,16 @@ export default {
         });
 
         const pokemonData = await Promise.all(promises);
+        console.log(pokemonData)
 
-        this.pokemonList = pokemonData.map((pokemon) => {
+        this.pokemonList = pokemonData.map((pokemon) => {          
           return {
             id: pokemon.id,
             name: pokemon.name,
+            imageFront: pokemon.sprites.other['official-artwork'].front_default,
+            imageBack: pokemon.sprites.other['official-artwork'].front_shiny,
+            //stats: pokemon.types
+            
           };
         });
       } catch (error) {
@@ -49,6 +57,8 @@ export default {
     <ul>
       <li v-for="pokemon in pokemonList" :key="pokemon.id">
         #{{ pokemon.id }} - {{ pokemon.name }}
+        <img :src="pokemon.imageFront" />
+        <img :src="pokemon.imageBack" />
       </li>
     </ul>
   </div>
