@@ -6,6 +6,6 @@ export class PokemonDataService {
   }
 
   static getPokemonType(): Promise<any>{
-    return config.get('/pokemon')
+    return config.get('/type')
   }
 }
